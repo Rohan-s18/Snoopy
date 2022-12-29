@@ -5,38 +5,96 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "/Users/rohansingh/github_repos/Snoopy/src/basics/arithmetic.h"
+
+
+void process_command(char* command);
+void process_arithmetic(char* vals);
+
 
 int main(){
 
-    //Using strok
+   char* version = "v1.0";
 
-    char message[80] = "arithmetic.add(3,3)";
-    const char s[1] = ".";
+    //Welcome Message
+    printf("Welcome to Snoopy %s\n",version);
 
-    char* token;
-   /*
-    token = strtok(message,s);
-    while(token != NULL){
-        printf("%s\n",token);
-        token = strtok(NULL,s);
+    //This will terminate the shell once the user hits 'q'
+    while(1){
+        
+        //This will hold the command
+        char command[2048];
+
+        printf(">> ");
+        scanf("%s",command);
+        //printf("\nYour Command: %s\n",command);
+
+        //Exiting if the command is just the letter q
+        if(sizeof(*command)/sizeof(char) == 1 && command[0] == 'q')
+            break;
+
+        process_command(command);
+        
     }
-    */
 
-    char values[1000] = "34.987,987.6);";
-
-    char *parsed_values;
-    parsed_values = strtok(values,")");
-    printf("%s\n",parsed_values);
-    
-
-    char *val_1 = strtok(parsed_values,",");
-    char *val_2 = strtok(NULL,",");
-
-
-    double d1 = atof(val_1);
-    double d2 = atof(val_2);
-    printf("%f\n",d1+d2);
+    printf("Leaving the Shell.....\n\n");
 
     return 0;
+
+}
+
+
+
+//  Implementation of the process_commands method
+void process_command(char* command){
+
+    //Splitting the command 
+    char* library;
+    char* function;
+
+    library = strtok(command,".");
+    function = strtok(NULL,".");
+
+    if(strcmp(library,"arithmetic") == 0){
+        process_arithmetic(function);
+    }
+    else{
+        printf("Invalid Library\n");
+    }  
+    
+}
+
+
+//  Arithmetic processor
+void process_arithmetic(char* function_cmd){
+
+    char* function;
+    char* values;
+
+    function = strtok(function_cmd,"(");
+    values = strtok(NULL,"(");
+
+    if(strcmp(function,"add") == 0){
+        double d = snoopy_add(values);
+        printf("%f\n",d);
+    }
+    else if(strcmp(function,"subtract") == 0){
+        double d = snoopy_subtract(values);
+        printf("%f\n",d);
+    }
+    else if(strcmp(function,"multiply") == 0){
+        double d = snoopy_multiply(values);
+        printf("%f\n",d);
+    }
+    else if(strcmp(function,"divide") == 0){
+        double d = snoopy_divide(values);
+        printf("%f\n",d);
+    }
+    else{
+        printf("Invalid Function\n");
+    }
+
+
+
 
 }

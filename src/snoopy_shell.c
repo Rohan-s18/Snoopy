@@ -70,7 +70,13 @@ void process_command(char* command){
 }
 
 
-//  Otherprocessing methods
+//  Other Processing Methods
+//  List of Processing methods
+//  1) void process_arithmetic
+
+
+
+//  Method to process arithemtic functions
 void process_arithmetic(char* function_cmd){
 
     char* function;
