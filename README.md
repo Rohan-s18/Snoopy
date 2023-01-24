@@ -6,6 +6,8 @@ The src folder contains the source code for the shell and interpreter and the bi
 
 **This is an open-source project so please free to fork it if you want :)** 
 
+This language is currently under development by the CWRU low-level programming club :)
+
 ## Contact
 For any feedback, suggestions, questions please contact me at:  
 rxs1182@case.edu  
